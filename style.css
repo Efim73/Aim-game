@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url(aim.jpg) no-repeat;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+h1{
+    font-size: 50px;
+    text-align: center;
+    /* margin-bottom: 15px; */
+    padding: 20px 0;
+}
+.container{
+    width: 1000px;
+    background-color: black;
+    height: 100vh;
+    margin: auto;
+    font-size: 0;
+    text-align: center;
+    /* padding-top: 40px; */
+
+    
+}
+h2{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    /* background-color: blue; */
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+canvas{
+    background-color: rgb(238, 238, 238);
+    width: 1000px;
+}
+a{
+    padding: 4px 10px;
+    display: inline-block;
+    margin: auto;
+    font-size: 30px;
+    color: black;
+    border: 2px solid #71f6a0;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 15px;
+    color: white;
+
+}
+.level{
+    padding: 10px 5px;
+    border: #71f6a0;
+
+}
+.level:hover{
+    border: 3px solid #71f6a0;
+}
+
+.gameButton{
+    width: 30%;
+    font-size: 60px;
+    border: 4px solid black;
+    border-radius: 0;
+    text-align: center;
+    line-height: 300px;
+    transition: 0.4s;
+    background-size: cover;
+    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.534);
+}
+.gameButton:hover{
+    box-shadow: 0 10px 10px black;
+    transform: translateY(-10px);
+}
+.timeButton{
+    background-image: url(0.jpg!d);
+}
+.accuracyButton{
+    background-image: url(1.jpg);
+    background-position: top;
+}
+.reactionButton{
+    background-image: url(2.jpg);
+}
+
