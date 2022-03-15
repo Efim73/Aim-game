@@ -7,6 +7,7 @@ body{
     background-size: cover;
     font-family: 'Roboto', sans-serif;
     color: white;
+    text-align: center;
 }
 h1{
     font-size: 50px;
@@ -22,8 +23,19 @@ h1{
     font-size: 0;
     text-align: center;
     /* padding-top: 40px; */
+    margin-bottom: 40px;
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 500px);
+    /* left: 50%;
+    transform: translateX(-50%); */
+    transform: translateY(-100%);
+    transition: 0.5s;
 
     
+}
+.showContainer{
+    transform: none;
 }
 h2{
     display: inline-block;
@@ -69,6 +81,11 @@ a{
     transition: 0.4s;
     background-size: cover;
     text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.534);
+    margin-bottom: 30px;
+    opacity: 0;
+}
+.visible{
+    opacity: 1;
 }
 .gameButton:hover{
     box-shadow: 0 10px 10px black;
@@ -78,10 +95,22 @@ a{
     background-image: url(0.jpg!d);
 }
 .accuracyButton{
-    background-image: url(1.jpg);
+    background-image: url(3.png);
     background-position: top;
 }
 .reactionButton{
     background-image: url(2.jpg);
+}
+.press{
+    background-color: green;
+    height: 500px;
+    width: 1000px;
+}
+.press{
+    border-radius: 0;
+    width: 980px;
+}
+h3{
+    font-size: 25px;
 }
 

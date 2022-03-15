@@ -9,17 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Aim training</title>
 </head>
 
 <body>
     <h1>Aim training</h1>
-    <a class="timeButton gameButton" href="">Time training</a>
-    <a class="accuracyButton gameButton" href="">Accuracy training</a>
-    <a class="reactionButton gameButton" href="">Reaction training</a>
+    <a class="timeButton gameButton visible" href="#/">Time training</a>
+    <a class="accuracyButton gameButton visible" href="#/">Accuracy training</a>
+    <a class="reactionButton gameButton visible" href="#/">Reaction training</a>
     <div class="container">
         <h1>Aim training</h1>
-        <h3>Time</h3>
+        <h3 id="gameMode">Time</h3>
 
         <h2 class="scoreboard">Score: 0</h2>
 
@@ -28,6 +28,11 @@
         <a href="#/" class="startButton">Start</a>
 
     </div>
+    <!-- <div class="container">
+        <h2 id="h2Reaction">Reaction training</h2>
+        <a class="press"></a>
+        <a class="pressA" href="#/">Start</a>
+    </div> -->
     <!-- <div class="container1">
         <h1>Aim training</h1>
         <h3>Accuracy</h3>
@@ -44,4 +49,5 @@
 
 
 
-<!-- по нажатию на каждую кнопку запускать цикл который выводит в консоли 100 200 300 ... -->
+
+

@@ -1,0 +1,4 @@
+как получить цвет фона тега?
+$0 - исследуемый тег
+
+window.getComputedStyle($0).backgroundColor
