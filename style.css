@@ -15,6 +15,14 @@ h1{
     /* margin-bottom: 15px; */
     padding: 20px 0;
 }
+.playTitle{
+    font-size: 50px;
+    text-align: center;
+    /* margin-bottom: 15px; */
+    padding: 20px 0;
+    display: inline-block;
+    margin-left: 90px;
+}
 .container{
     width: 1000px;
     background-color: black;
@@ -113,4 +121,18 @@ a{
 h3{
     font-size: 25px;
 }
+.close{
+    width: 5%;
+    margin-right: 0;
+    float: right;
+    border: none;
+    margin-right: 5px;
+    top: 0;
+}
+.close img{
+    width: 40px;
+    display: inline-block;
+    filter: invert(100%);
+}
+
 

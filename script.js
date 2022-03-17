@@ -29,8 +29,15 @@ let randomTime = Math.floor(Math.random() * 9) + 2;
 let watchReaction = 0;
 let pressA = document.getElementsByClassName('pressA')[0]
 let h2Reaction = document.getElementById('h2Reaction')
+let close = document.getElementsByClassName('close')[0];
 
+close.onclick = function(){
+    container.classList.remove('showContainer')
+    accuracyButton.classList.add('visible')
+    timeButton.classList.add('visible')
+    reactionButton.classList.add('visible')
 
+}
 // pressA.onclick = function(){
 //     console.log(randomTime);
 //     h2Reaction.innerHTML='When you see green -tup to this button'
@@ -109,30 +116,14 @@ function accuracyMode() {
     //     getCircle();
     // }
     if (startButton.innerHTML == 'Start') {
-        circles = 20;
+        circles = 100;
         score=0;
         accuracyTime=1000;
         scoreboard.innerHTML='Score: '+score
         watch.innerHTML = 'Circles: ' + circles;
         startButton.innerHTML = 'Stop'
         getCircle();
-        gameInterval = setInterval(() => {
-            // timeShot++
-            getCircle();
-            circles--;
-
-            watch.innerHTML = 'Circles: ' + circles;
-            if (circles == 0) {
-                clearInterval(gameInterval);
-                ctx.clearRect(0, 0, c.width, c.height);
-                startButton.innerHTML = 'Start'
-
-            }
-            if(score>10){
-                accuracyTime=100;
-                console.log(accuracyTime);
-            }
-        },accuracyTime)
+        accuracyInterval();
     }
     else {
         clearInterval(gameInterval);
@@ -140,6 +131,26 @@ function accuracyMode() {
         startButton.innerHTML = 'Start'
     }
 }
+
+
+function accuracyInterval(){
+    clearInterval(gameInterval);
+    gameInterval = setInterval(() => {
+        // timeShot++
+        getCircle();
+        circles--;
+
+        watch.innerHTML = 'Circles: ' + circles;
+        if (circles == 0) {
+            clearInterval(gameInterval);
+            ctx.clearRect(0, 0, c.width, c.height);
+            startButton.innerHTML = 'Start'
+
+        }
+    },accuracyTime)
+}
+
+
 function timeMode() {
     if (startButton.innerHTML == 'Start') {
         getCircle();
@@ -346,7 +357,23 @@ c.onclick = function (event) {
         }
         else if (mode == 'accuracy') {
             ctx.clearRect(0, 0, c.width, c.height)
+            accuracyTime=accuracyTime-5;
+            accuracyInterval();
+            // if(score>4){
+            //     accuracyTime=800;
 
+
+            //     accuracyInterval();
+            // }
+            // if(score>10){
+            //     accuracyTime=600;
+            //     accuracyInterval();
+            // }
+            // if(score>15){
+            //     accuracyTime=500;
+            //     accuracyInterval();
+            // }
+            
         }
 
     }
