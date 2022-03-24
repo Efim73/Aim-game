@@ -134,5 +134,20 @@ h3{
     display: inline-block;
     filter: invert(100%);
 }
+@media(max-width: 3000px){
+    .gameButton{
+        height: 20%;
+    }
+    .gameButton{
+        width: 30%;
+    }
+    .gameButton h2{
+        line-height: 50px;
+        font-size: 50px;
+        width: 100%;
+    }
+    .container{
+        transform: translateY(-120%);
+    }
 
-
+}
