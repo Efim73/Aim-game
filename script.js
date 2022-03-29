@@ -8,10 +8,11 @@ let watch = document.getElementsByClassName('watch')[0]
 let startButton = document.getElementsByClassName('startButton')[0]
 var c = document.getElementById("myCanvas");
 c.width = container.offsetWidth;
-c.height = 600;
+c.height = window.innerHeight / 2;
 var ctx = c.getContext("2d");
 let time = 6;
 let x, y, accuracyTime, currentScore;
+let dotRadius = 30
 
 let scoreboard = document.getElementsByClassName('scoreboard')[0]
 let score = 0;
@@ -34,6 +35,10 @@ let pressA = document.getElementsByClassName('pressA')[0]
 let h2Reaction = document.getElementById('h2Reaction')
 let closeButton = document.getElementsByClassName('close')[0];
 
+
+
+
+
 closeButton.onclick = function () {
     container.classList.remove('showContainer')
     accuracyButton.classList.add('visible')
@@ -42,7 +47,7 @@ closeButton.onclick = function () {
 
 }
 
-
+console.log(window.innerWidth);
 
 
 
@@ -241,7 +246,7 @@ function timeMode() {
 
 function getCircle() {
     ctx.clearRect(0, 0, c.width, c.height)
-    let dotRadius = 30
+
     x = Math.floor(Math.random() * (c.width - dotRadius * 2)) + dotRadius
     y = Math.floor(Math.random() * (c.height - dotRadius * 2)) + dotRadius
     ctx.beginPath();
@@ -259,6 +264,10 @@ c.onclick = function (event) {
         score++;
         scoreboard.innerHTML = 'Score: ' + score;
         if (mode == 'time') {
+            if(dotRadius > 10){
+                dotRadius = dotRadius-0.2;
+                
+            }
             getCircle();
 
 
@@ -278,7 +287,7 @@ c.onclick = function (event) {
         attempts--;
         if(attempts==0){
             startButton.innerHTML='Start'
-            
+
         }
         else{
             getReaction();
