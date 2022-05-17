@@ -1,302 +1,120 @@
-let level = document.getElementsByClassName('level')[0];
-let timeButton = document.getElementsByClassName('gameButton')[0];
-let accuracyButton = document.getElementsByClassName('gameButton')[1];
-let reactionButton = document.getElementsByClassName('gameButton')[2];
-let levelPlay = false;
-let container = document.getElementsByClassName('container')[0];
-let watch = document.getElementsByClassName('watch')[0]
-let startButton = document.getElementsByClassName('startButton')[0]
-var c = document.getElementById("myCanvas");
-c.width = container.offsetWidth;
-c.height = window.innerHeight / 2;
-var ctx = c.getContext("2d");
-let time = 6;
-let x, y, accuracyTime, currentScore;
-let dotRadius = 30
-
-let scoreboard = document.getElementsByClassName('scoreboard')[0]
-let score = 0;
-let gameInterval, gameTimeout;
-let allowPlay = false
-let mode = 'time';
-let gameMode = document.getElementById('gameMode')
-let modes = document.getElementsByClassName('modes')[0];
-
-let timer = 0;
+let rubashka = 'рубашка1.png'
+let container = document.getElementsByClassName('container')[0]
+let images = []
+let a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+let counter = 0;
+let openCards = [];
+let steps = document.getElementsByClassName('steps')[0];
+let step = 0;
+let newGame = document.getElementsByClassName('newGame')[0];
+let wins = 0;
+let title = document.getElementsByClassName('title')[0];
+let h1 = document.getElementsByTagName('h1')[0];
 
 
 
-let timeShot = 0;
-let circles = 20;
-let randomNumber = 2;
-let randomTime = Math.floor(Math.random() * 9) + 2;
-let watchReaction = 0;
-let pressA = document.getElementsByClassName('pressA')[0]
-let h2Reaction = document.getElementById('h2Reaction')
-let closeButton = document.getElementsByClassName('close')[0];
+title.onclick = function () {
+    let allCards = document.getElementsByTagName('img')
+    for (i = 0; i < 24; i++) {
+       allCards[i].src = 'салют.jpg'
+       allCards[i].style.borderRadius='83px';
 
-
-
-
-
-closeButton.onclick = function () {
-    container.classList.remove('showContainer')
-    accuracyButton.classList.add('visible')
-    timeButton.classList.add('visible')
-    reactionButton.classList.add('visible')
-
-}
-
-console.log(window.innerWidth);
-
-
-
-
-
-
-
-timeButton.onclick = function () {
-    allowPlay = true;
-    mode = 'time';
-    removeCards()
-
-
-}
-accuracyButton.onclick = function () {
-    mode = 'accuracy'
-    removeCards()
-    allowPlay = true;
-
-
-}
-
-reactionButton.onclick = function () {
-    mode = 'reaction'
-
-    removeCards()
-
-
-
-
-
-
-
-
-}
-
-function removeCards() {
-    accuracyButton.classList.remove('visible')
-    timeButton.classList.remove('visible')
-    reactionButton.classList.remove('visible')
-    container.classList.add('showContainer')
-    createGame();
-}
-
-function stopGame(){
-    startButton.innerHTML='Start'
-    ctx.clearRect(0,0, c.width, c.height);
-    scoreboard.innerHTML='Score: 0'
-    clearInterval(gameInterval);
-}
-
-function createGame() {
-    if (mode == 'time') {
-        gameMode.innerHTML = 'Time'
-        time = 60;
-        watch.innerHTML = 'Time: ' + time;
-        stopGame();
-        startButton.onclick = function () {
-            timeMode();
-
-        }
+       
     }
-    else if (mode == 'accuracy') {
-        gameMode.innerHTML = 'Accuracy'
-        watch.innerHTML = 'Circles: 20'
-        stopGame();
-        startButton.onclick = () => {
-            accuracyMode();
-        }
+}
+newGame.onclick = function () {
+    counter = 0;
+    document.body.style.background = 'url("геометрия.png")'
+    step = 0;
+    steps.innerHTML = 'Попытки: ' + step
+    openCards = [];
+    let allCards = document.getElementsByTagName('img')
+    
+    for (let i = 0; i < 24; i++) {
+        allCards[i].src = 'рубашка.webp'
+        allCards[i].style.pointerEvents = 'auto';
     }
-    else if (mode == 'reaction') {
-        gameMode.innerHTML = 'Reaction' 
-        watch.innerHTML = 'Attempts: 20'
-        stopGame();
-
-
-
-        startButton.onclick = () => {
-            reactionMode();
-        }
+    for (let i = images.length - 1; i > 0; i--) {
+        let randomNumber = Math.floor(Math.random() * (i + 1))
+        let vremenaya = images[i]
+        images[i] = images[randomNumber]
+        images[randomNumber] = vremenaya;
     }
 }
 
-function reactionMode() {
-    if (startButton.innerHTML == 'Start') {
-        startButton.innerHTML = 'Stop'
-        attempts = 5;
-        score = 10000;
-        watch.innerHTML = 'Attempts: ' + attempts;
-        getReaction();
-    }
-    else {
-        startButton.innerHTML = 'Start'
-        clearInterval(gameInterval);
-        ctx.clearRect(0, 0, c.width, c.height);
-    }
-
-    allowPlay = true;
-
-
+for (let i = 1; i < 13; i++) {
+    images.push('0 (' + i + ').jpg')
+    images.push('0 (' + i + ').jpg')
 }
 
 
-function getReaction() {
-    ctx.clearRect(0, 0, c.width, c.height)
-    ctx.beginPath()
-    ctx.rect(0, 0, c.width, c.height)
-    ctx.fillStyle = 'green'
-    // timer = 0;
-    randomTime = Math.floor(Math.random() * 9) + 2;
-    gameTimeout = setTimeout(function () {
-        ctx.fill();
-        timer = 0;
-        gameInterval = setInterval(() => {
-
-            if (timer < score) {
-                timer++;
-                scoreboard.innerHTML = 'Score: ' + timer;
+for (let i = images.length - 1; i > 0; i--) {
+    let randomNumber = Math.floor(Math.random() * (i + 1))
+    let vremenaya = images[i]
+    images[i] = images[randomNumber]
+    images[randomNumber] = vremenaya;
+}
+for (let i = 0; i < 24; i++) {
+    let img = document.createElement('img')
+    img.src = rubashka
+    title.onclick = function(){
+        img.src = 'салют.jpg'
+    }
+    img.onclick = function (event) {
+        // для извлечения напзвания картинки как в файле. Если игрок кликнул по рубашке, тогда засчитывать нажатие.
+        if (img.getAttribute('src')==rubashka) {
+            // добавить данную карточку в массив с открытыми карточками
+            openCards.push(img)
+            counter++;
+            img.style.pointerEvents = 'none'
+            // event.target - (тэг по которому кликает игрок)
+            flipImage(event.target, images[i]);
+            // если открыли 2 карточки
+            if (counter == 2) {
+                step++;
+                steps.innerHTML = 'Попытки: ' + step;
+                let cards = document.getElementsByTagName('img')
+                // если картинки совпали                
+                if (openCards[0].src == openCards[1].src) {
+                    wins++
+                    console.log('верно');
+                    counter = 0;
+                    openCards = [];
+                    if (wins == 12) {
+                        document.body.style.background = 'url("салют.jpg")'
+                    }
+                }
+                else {
+                    console.log('неверно');
+                    // цикл перебирает все карточки и блокирует их
+                    for (let card of cards) {
+                        card.style.pointerEvents = 'none'
+                    }
+                    counter = 0;
+                    // пауза пред закрытием двух карточек
+                    setTimeout(() => {
+                        openCards[0].src = rubashka
+                        openCards[1].src = rubashka
+                        for (let card of cards) {
+                            card.style.pointerEvents = 'auto'
+                        }
+                        openCards = [];
+                    }, 1000)
+                }
             }
-
-        }, 0.1)
-    }, randomTime * 1000)
-}
-
-function accuracyMode() {
-
-
-
-
-    if (startButton.innerHTML == 'Start') {
-        circles = 100;
-        score = 0;
-        accuracyTime = 1000;
-        scoreboard.innerHTML = 'Score: ' + score
-        watch.innerHTML = 'Circles: ' + circles;
-        startButton.innerHTML = 'Stop'
-        getCircle();
-        accuracyInterval();
-    }
-    else {
-        clearInterval(gameInterval);
-        ctx.clearRect(0, 0, c.width, c.height);
-        startButton.innerHTML = 'Start'
-    }
-}
-
-
-function accuracyInterval() {
-    clearInterval(gameInterval);
-    gameInterval = setInterval(() => {
-        // timeShot++
-        getCircle();
-        circles--;
-
-        watch.innerHTML = 'Circles: ' + circles;
-        if (circles == 0) {
-            clearInterval(gameInterval);
-            ctx.clearRect(0, 0, c.width, c.height);
-            startButton.innerHTML = 'Start'
-
         }
-    }, accuracyTime)
+    }
+    // добавляет карточки в контеинер
+    container.appendChild(img)
+
+}
+function flipImage(img, image) {
+    img.src = image;
+
 }
 
 
-function timeMode() {
-    if (startButton.innerHTML == 'Start') {
-        getCircle();
-        startButton.innerHTML = 'Stop'
-        time = 60;
-        allowPlay = true;
-        time--;
-
-        watch.innerHTML = 'Time: ' + time
-        score = 0;
-        scoreboard.innerHTML = 'Score: ' + score;
-        gameInterval = setInterval(() => {
-            time--;
-            watch.innerHTML = 'Time: ' + time;
-            if (time == 0) {
-                allowPlay = false;
-                startButton.innerHTML = 'Start'
-                score = 0;
-                ctx.clearRect(0, 0, c.width, c.height)
-                clearInterval(gameInterval);
-            }
-        }, 1000)
-    }
-
-
-    else {
-        startButton.innerHTML = 'Start'
-        clearInterval(gameInterval);
-    }
-}
-
-function getCircle() {
-    ctx.clearRect(0, 0, c.width, c.height)
-
-    x = Math.floor(Math.random() * (c.width - dotRadius * 2)) + dotRadius
-    y = Math.floor(Math.random() * (c.height - dotRadius * 2)) + dotRadius
-    ctx.beginPath();
-    ctx.arc(x, y, dotRadius, 0, 2 * Math.PI);
-    ctx.fillStyle = 'red'
-    ctx.fill()
-    ctx.stroke();
-}
-
-c.onclick = function (event) {
-    console.log(ctx.getImageData(event.offsetX, event.offsetY, 1, 1));
-    // это условие - проверяет попали мы на красную фигуру, 255-красный, event.offsetX-Х мышки, 1,1-площадь 1Х1 px
-    if (ctx.getImageData(event.offsetX, event.offsetY, 1, 1).data[0] == 255 && allowPlay == true) {
-        console.log(14);
-        score++;
-        scoreboard.innerHTML = 'Score: ' + score;
-        if (mode == 'time') {
-            if(dotRadius > 10){
-                dotRadius = dotRadius-0.2;
-                
-            }
-            getCircle();
 
 
 
-        }
-        else if (mode == 'accuracy') {
-            ctx.clearRect(0, 0, c.width, c.height)
-            accuracyTime = accuracyTime - 5;
-            accuracyInterval();
 
-        }
-
-    }
-
-    if (ctx.getImageData(event.offsetX, event.offsetY, 1, 1).data[1] == 128 && allowPlay == true) {
-        clearInterval(gameInterval);
-        attempts--;
-        if(attempts==0){
-            startButton.innerHTML='Start'
-
-        }
-        else{
-            getReaction();
-        }
-        watch.innerHTML = 'Attempts: ' + attempts;
-        ctx.clearRect(0, 0, c.width, c.height)
-        
-        console.log(timer, score);
-        score=timer
-
-    }
-}
